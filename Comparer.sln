@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comparer", "OOSession\Comparer.csproj", "{941E3E50-B3EE-48FC-B92F-BB4E3D781EA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClass", "TestClass\TestClass.csproj", "{212BA668-9CAA-42FD-9F44-F4931C71BB24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{941E3E50-B3EE-48FC-B92F-BB4E3D781EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941E3E50-B3EE-48FC-B92F-BB4E3D781EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941E3E50-B3EE-48FC-B92F-BB4E3D781EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941E3E50-B3EE-48FC-B92F-BB4E3D781EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212BA668-9CAA-42FD-9F44-F4931C71BB24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212BA668-9CAA-42FD-9F44-F4931C71BB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212BA668-9CAA-42FD-9F44-F4931C71BB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212BA668-9CAA-42FD-9F44-F4931C71BB24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
