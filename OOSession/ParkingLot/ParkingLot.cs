@@ -1,20 +1,27 @@
-﻿namespace OOSession.ParkingLot
+﻿using System;
+using System.Collections.Generic;
+
+namespace OOSession.ParkingLot
 {
     public class ParkingLot
     {
-        Car parkCar;
+        readonly Dictionary<Guid, Car> _parkingCars;
+
         public ParkingLot()
         {
+            _parkingCars = new Dictionary<Guid, Car>();
         }
 
-        public void Park(Car mycar)
+        public Guid Park(Car mycar)
         {
-            parkCar = mycar;
+            var token = Guid.NewGuid();
+            _parkingCars.Add(token, mycar);
+            return token;
         }
 
-        public Car GetCar()
+        public Car GetCar(Guid token)
         {
-            return parkCar;
+            return _parkingCars.ContainsKey(token) ? _parkingCars[token] : null;
         }
     }
 }
