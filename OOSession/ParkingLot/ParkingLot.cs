@@ -21,7 +21,13 @@ namespace OOSession.ParkingLot
 
         public Car GetCar(Guid token)
         {
-            return _parkingCars.ContainsKey(token) ? _parkingCars[token] : null;
+            Car result = null;
+            if (_parkingCars.ContainsKey(token))
+            {
+                result = _parkingCars[token];
+                _parkingCars.Remove(token);
+            }
+            return result;
         }
     }
 }

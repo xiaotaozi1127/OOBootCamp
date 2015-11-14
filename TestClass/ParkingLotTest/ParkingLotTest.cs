@@ -45,7 +45,20 @@ namespace TestClass.ParkingLotTest
             var car = parkingLot.GetCar(token1);
             Assert.Equal(mycar, car);
             car = parkingLot.GetCar(token2);
-            Assert.NotEqual(mycar, car);
+            Assert.Equal(anotherCar, car);
+        }
+
+        [Fact]
+        public void should_not_get_the_same_car_twice_if_parked_once()
+        {
+            var mycar = new Car("no1");
+            var parkingLot = new ParkingLot();
+            var token = parkingLot.Park(mycar);
+
+            var car = parkingLot.GetCar(token);
+            Assert.Equal(mycar, car);
+            car = parkingLot.GetCar(token);
+            Assert.Null(car);
         }
     }
 }
