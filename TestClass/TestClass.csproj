@@ -67,13 +67,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OOSession\Comparer.csproj">
-      <Project>{941e3e50-b3ee-48fc-b92f-bb4e3d781ea4}</Project>
-      <Name>Comparer</Name>
-    </ProjectReference>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <ProjectReference Include="..\OOBootCamp\OOBootCamp.csproj">
+      <Project>{941e3e50-b3ee-48fc-b92f-bb4e3d781ea4}</Project>
+      <Name>OOBootCamp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

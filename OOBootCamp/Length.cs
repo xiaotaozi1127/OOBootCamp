@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OOBootCamp
+﻿namespace OOBootCamp
 {
     public enum Unit
     {

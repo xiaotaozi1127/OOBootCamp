@@ -1,7 +1,7 @@
 ﻿using OOBootCamp;
 using Xunit;
 
-namespace TestClass
+namespace TestClass.ComparerTest
 {
     public class ComparerTest
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OOSession.ParkingLot
+namespace OOBootCamp.ParkingLot
 {
     public class ParkingLot
     {

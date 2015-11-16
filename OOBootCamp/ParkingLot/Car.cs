@@ -1,4 +1,4 @@
-namespace OOSession.ParkingLot
+namespace OOBootCamp.ParkingLot
 {
     public class Car
     {

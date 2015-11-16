@@ -1,5 +1,5 @@
 ﻿using System;
-using OOSession.ParkingLot;
+using OOBootCamp.ParkingLot;
 using Xunit;
 
 namespace TestClass.ParkingLotTest
