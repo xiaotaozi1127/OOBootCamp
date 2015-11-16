@@ -29,7 +29,7 @@ namespace TestClass.ParkingLotTest
         {
             var mycar = new Car("no1");
             var parkingLot = new ParkingLot();
-            parkingLot.Park(mycar);
+            var token = parkingLot.Park(mycar);
             var car = parkingLot.GetCar(Guid.NewGuid());
             Assert.Null(car);
         }
@@ -46,6 +46,17 @@ namespace TestClass.ParkingLotTest
             Assert.Equal(mycar, car);
             car = parkingLot.GetCar(token2);
             Assert.Equal(anotherCar, car);
+        }
+
+        [Fact]
+        public void should_not_park_the_same_car_again_if_already_parked()
+        {
+            var mycar = new Car("no1");
+            var parkingLot = new ParkingLot();
+            var token = parkingLot.Park(mycar);
+            var token2 = parkingLot.Park(mycar);
+            Assert.NotEqual(Guid.Empty, token);
+            Assert.Equal(Guid.Empty, token2);
         }
 
         [Fact]

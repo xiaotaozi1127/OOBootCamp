@@ -14,8 +14,12 @@ namespace OOSession.ParkingLot
 
         public Guid Park(Car mycar)
         {
-            var token = Guid.NewGuid();
-            _parkingCars.Add(token, mycar);
+            var token = Guid.Empty;
+            if (!_parkingCars.ContainsValue(mycar))
+            {
+                token = Guid.NewGuid();
+                _parkingCars.Add(token, mycar);
+            }
             return token;
         }
 
