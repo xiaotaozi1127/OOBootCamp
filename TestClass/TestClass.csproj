@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComparerFacts\ComparerFacts.cs" />
+    <Compile Include="ParkingBoyFacts\ParkingBoyFacts.cs" />
     <Compile Include="ParkingLotFacts\ParkingLotFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
