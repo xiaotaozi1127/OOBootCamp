@@ -59,8 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComparerTest\ComparerTest.cs" />
-    <Compile Include="ParkingLotTest\ParkingLotTest.cs" />
+    <Compile Include="ComparerFacts\ComparerFacts.cs" />
+    <Compile Include="ParkingLotFacts\ParkingLotFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

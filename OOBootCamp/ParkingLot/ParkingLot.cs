@@ -14,16 +14,16 @@ namespace OOBootCamp.ParkingLot
 
         public Guid Park(Car mycar)
         {
-            var token = Guid.Empty;
             if (!_parkingCars.ContainsValue(mycar))
             {
-                token = Guid.NewGuid();
+                var token = Guid.NewGuid();
                 _parkingCars.Add(token, mycar);
+                return token;
             }
-            return token;
+            throw new InvalidOperationException("can not park a existed car.");
         }
 
-        public Car GetCar(Guid token)
+        public Car PickCar(Guid token)
         {
             Car result = null;
             if (_parkingCars.ContainsKey(token))

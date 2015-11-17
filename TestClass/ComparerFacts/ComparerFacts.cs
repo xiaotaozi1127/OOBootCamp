@@ -1,9 +1,9 @@
 ﻿using OOBootCamp;
 using Xunit;
 
-namespace TestClass.ComparerTest
+namespace TestClass.ComparerFacts
 {
-    public class ComparerTest
+    public class ComparerFacts
     {
         [Fact]
         public void should_get_equal_when_compare_two_lengths_if_they_are_equal()
