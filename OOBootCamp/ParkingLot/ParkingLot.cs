@@ -6,11 +6,19 @@ namespace OOBootCamp.ParkingLot
     public class ParkingLot
     {
         readonly Dictionary<Guid, Car> _parkingCars;
+        private readonly int _size;
 
-        public ParkingLot()
+        public ParkingLot() : this(20)
         {
+        }
+
+        public ParkingLot(int size)
+        {
+            _size = size;
             _parkingCars = new Dictionary<Guid, Car>();
         }
+
+        public int ParkingLotNumber { get; set; }
 
         public Guid Park(Car mycar)
         {
@@ -32,6 +40,11 @@ namespace OOBootCamp.ParkingLot
                 _parkingCars.Remove(token);
             }
             return result;
+        }
+
+        public bool NotFull()
+        {
+            return _parkingCars.Count < _size;
         }
     }
 }
