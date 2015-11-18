@@ -1,5 +1,4 @@
 ﻿using OOBootCamp.ParkingLot;
-using OOBootCamp.ParkingBoy;
 using Xunit;
 
 namespace TestClass.ParkingBoyFacts
@@ -12,7 +11,9 @@ namespace TestClass.ParkingBoyFacts
             var car = new Car("no1");
             var parkingLot = new ParkingLot(1);
             var parkingBoy = new ParkingBoy();
-            parkingBoy.AddParkingLot(parkingLot);
+            var parkingManager = new ParkingLotManager();
+            parkingManager.AddParkingLot(parkingLot);
+            parkingBoy.ParkingLotManager = parkingManager;
 
             var parkingInfo = parkingBoy.Park(car);
             Assert.Same(car, parkingBoy.PickCar(parkingInfo));
@@ -26,7 +27,9 @@ namespace TestClass.ParkingBoyFacts
             var parkingLot = new ParkingLot(2);
             var parkingBoy = new ParkingBoy();
 
-            parkingBoy.AddParkingLot(parkingLot);
+            var parkingManager = new ParkingLotManager();
+            parkingManager.AddParkingLot(parkingLot);
+            parkingBoy.ParkingLotManager = parkingManager;
 
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
@@ -43,8 +46,12 @@ namespace TestClass.ParkingBoyFacts
 
             var parkingLot1 = new ParkingLot(1);
             var parkingLot2 = new ParkingLot(1);
-            parkingBoy.AddParkingLot(parkingLot1);
-            parkingBoy.AddParkingLot(parkingLot2);
+
+
+            var parkingManager = new ParkingLotManager();
+            parkingManager.AddParkingLot(parkingLot1);
+            parkingManager.AddParkingLot(parkingLot2);
+            parkingBoy.ParkingLotManager = parkingManager;
 
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
