@@ -8,8 +8,9 @@ namespace OOBootCamp.ParkingLot
         readonly Dictionary<Guid, Car> _parkingCars;
         private readonly int _size;
 
-        public ParkingLot() : this(20)
+        public ParkingLot()
         {
+            _parkingCars = new Dictionary<Guid, Car>();
         }
 
         public ParkingLot(int size)
@@ -22,13 +23,10 @@ namespace OOBootCamp.ParkingLot
 
         public Guid Park(Car mycar)
         {
-            if (!_parkingCars.ContainsValue(mycar))
-            {
-                var token = Guid.NewGuid();
-                _parkingCars.Add(token, mycar);
-                return token;
-            }
-            throw new InvalidOperationException("can not park a existed car.");
+            if (_parkingCars.ContainsValue(mycar)) throw new InvalidOperationException("can not park a existed car.");
+            var token = Guid.NewGuid();
+            _parkingCars.Add(token, mycar);
+            return token;
         }
 
         public Car PickCar(Guid token)

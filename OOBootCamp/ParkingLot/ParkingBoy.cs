@@ -9,6 +9,7 @@ namespace OOBootCamp.ParkingLot
         public ParkingInfo Park(Car car)
         {
             var availableParkingLot = ParkingLotManager.GetAvailableParkingLot();
+            if (availableParkingLot == null) throw new InvalidOperationException("There is no available parking lot");
             var token = availableParkingLot.Park(car);
             return new ParkingInfo(availableParkingLot.ParkingLotNumber, token);
         }
