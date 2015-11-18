@@ -9,7 +9,7 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_get_a_car_after_park_a_car()
         {
-            var mycar = new Car("no1");
+            var mycar = new Car();
             var parkingLot = new ParkingLot();
             var token = parkingLot.Park(mycar);
 
@@ -29,7 +29,7 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_not_get_a_car_if_wrong_token_provided()
         {
-            var mycar = new Car("no1");
+            var mycar = new Car();
             var parkingLot = new ParkingLot();
             parkingLot.Park(mycar);
             var car = parkingLot.PickCar(Guid.NewGuid());
@@ -39,8 +39,8 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_not_get_wrong_car_if_multiple_car_parked()
         {
-            var mycar = new Car("no1");
-            var anotherCar = new Car("no2");
+            var mycar = new Car();
+            var anotherCar = new Car();
             var parkingLot = new ParkingLot();
             var token1 = parkingLot.Park(mycar);
             var token2 = parkingLot.Park(anotherCar);
@@ -53,7 +53,7 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_throw_exception_when_park_a_existed_car()
         {
-            var mycar = new Car("no1");
+            var mycar = new Car();
             var parkingLot = new ParkingLot();
             parkingLot.Park(mycar);
 
@@ -64,7 +64,7 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_park_car_again_after_pick_a_car()
         {
-            var mycar = new Car("no1");
+            var mycar = new Car();
             var parkingLot = new ParkingLot();
             var token = parkingLot.Park(mycar);
             parkingLot.PickCar(token);
@@ -76,7 +76,7 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_not_get_the_car_if_already_picked()
         {
-            var mycar = new Car("no1");
+            var mycar = new Car();
             var parkingLot = new ParkingLot();
             var token = parkingLot.Park(mycar);
 

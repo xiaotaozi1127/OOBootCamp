@@ -8,7 +8,7 @@ namespace TestClass.ParkingBoyFacts
         [Fact]
         public void should_pick_car_after_park_car()
         {
-            var car = new Car("no1");
+            var car = new Car();
             var parkingLot = new ParkingLot(1);
             var parkingBoy = new ParkingBoy();
             var parkingManager = new ParkingLotManager();
@@ -22,8 +22,8 @@ namespace TestClass.ParkingBoyFacts
         [Fact]
         public void should_park_to_an_exist_parkingLot_is_not_full()
         {
-            var bmw = new Car("no1");
-            var audi = new Car("no2");
+            var bmw = new Car();
+            var audi = new Car();
             var parkingLot = new ParkingLot(2);
             var parkingBoy = new ParkingBoy();
 
@@ -40,13 +40,12 @@ namespace TestClass.ParkingBoyFacts
         [Fact]
         public void should_park_to_a_new_parkingLot_if_is_full()
         {
-            var bmw = new Car("no1");
-            var audi = new Car("no2");
+            var bmw = new Car();
+            var audi = new Car();
             var parkingBoy = new ParkingBoy();
 
             var parkingLot1 = new ParkingLot(1);
             var parkingLot2 = new ParkingLot(1);
-
 
             var parkingManager = new ParkingLotManager();
             parkingManager.AddParkingLot(parkingLot1);
@@ -56,8 +55,6 @@ namespace TestClass.ParkingBoyFacts
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
 
-            Assert.True(bmwParkingInfo.ParkingLotNumber == 1);
-            Assert.True(audiParkingInfo.ParkingLotNumber == 2);
             Assert.True(bmwParkingInfo.ParkingLotNumber != audiParkingInfo.ParkingLotNumber);
         }
     }
