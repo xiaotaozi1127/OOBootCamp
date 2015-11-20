@@ -19,16 +19,5 @@ namespace OOBootCamp.ParkingLot
             var parkingLot = ParkingLotManager.GetParkingLotByParkingNumber(parkingInfo.ParkingLotNumber);
             return parkingLot.PickCar(parkingInfo.ParkingToken);
         }
-
-        public class ParkingInfo
-        {
-            public ParkingInfo(int parkingLotNumber, Guid parkingToken)
-            {
-                ParkingLotNumber = parkingLotNumber;
-                ParkingToken = parkingToken;
-            }
-            public int ParkingLotNumber { get; set; }
-            public Guid ParkingToken { get; set; }
-        }
     }
 }
