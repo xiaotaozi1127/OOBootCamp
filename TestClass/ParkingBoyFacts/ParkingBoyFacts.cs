@@ -10,12 +10,8 @@ namespace TestClass.ParkingBoyFacts
         public void should_pick_car_success_after_park_car()
         {
             var car = new Car();
-            var parkingLot = new ParkingLot(1);
-            var parkingBoy = new ParkingBoy();
-            var parkingManager = new ParkingLotManager();
-            parkingManager.AddParkingLot(parkingLot);
-            parkingBoy.ParkingLotManager = parkingManager;
-
+            var parkingLot = new ParkingLot(1, 1);
+            var parkingBoy = new ParkingBoy(parkingLot);
             var parkingInfo = parkingBoy.Park(car);
             Assert.Same(car, parkingBoy.PickCar(parkingInfo));
         }
@@ -25,18 +21,18 @@ namespace TestClass.ParkingBoyFacts
         {
             var bmw = new Car();
             var audi = new Car();
-            var parkingLot = new ParkingLot(2);
+            var parkingLot = new ParkingLot(1, 2);
 
-            var parkingManager = new ParkingLotManager();
-            parkingManager.AddParkingLot(parkingLot);
-            parkingManager.AddParkingLot(new ParkingLot(2));
-            var parkingBoy = new ParkingBoy {ParkingLotManager = parkingManager};
+            var parkingBoy = new ParkingBoy(parkingLot, new ParkingLot(2, 2));
 
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
 
             Assert.Equal(parkingLot.ParkingLotNumber, bmwParkingInfo.ParkingLotNumber);
             Assert.Equal(parkingLot.ParkingLotNumber, audiParkingInfo.ParkingLotNumber);
+
+            Assert.Equal(bmw, parkingBoy.PickCar(bmwParkingInfo));
+            Assert.Equal(audi, parkingBoy.PickCar(audiParkingInfo));
         }
 
         [Fact]
@@ -45,13 +41,9 @@ namespace TestClass.ParkingBoyFacts
             var bmw = new Car();
             var audi = new Car();
 
-            var parkingLot1 = new ParkingLot(1);
-            var parkingLot2 = new ParkingLot(1);
-
-            var parkingManager = new ParkingLotManager();
-            parkingManager.AddParkingLot(parkingLot1);
-            parkingManager.AddParkingLot(parkingLot2);
-            var parkingBoy = new ParkingBoy {ParkingLotManager = parkingManager};
+            var parkingLot1 = new ParkingLot(1, 1);
+            var parkingLot2 = new ParkingLot(2, 1);
+            var parkingBoy = new ParkingBoy(parkingLot1, parkingLot2);
 
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
@@ -67,14 +59,10 @@ namespace TestClass.ParkingBoyFacts
             var audi = new Car();
             var changcheng = new Car();
 
-            var parkingLot1 = new ParkingLot(1);
-            var parkingLot2 = new ParkingLot(1);
+            var parkingLot1 = new ParkingLot(1, 1);
+            var parkingLot2 = new ParkingLot(2, 1);
 
-            var parkingManager = new ParkingLotManager();
-            parkingManager.AddParkingLot(parkingLot1);
-            parkingManager.AddParkingLot(parkingLot2);
-            parkingManager.AddParkingLot(new ParkingLot(1));
-            var parkingBoy = new ParkingBoy {ParkingLotManager = parkingManager};
+            var parkingBoy = new ParkingBoy(parkingLot1, parkingLot2, new ParkingLot(3, 1));
 
             var bmwToken = parkingBoy.Park(bmw);
             parkingBoy.Park(audi);
@@ -87,9 +75,7 @@ namespace TestClass.ParkingBoyFacts
         [Fact]
         public void should_park_car_fail_when_all_parkingLots_are_full()
         {
-            var parkingLotManager = new ParkingLotManager();
-            parkingLotManager.AddParkingLot(new ParkingLot(1));
-            var parkingBoy = new ParkingBoy {ParkingLotManager = parkingLotManager};
+            var parkingBoy = new ParkingBoy(new ParkingLot(1, 1));
             parkingBoy.Park(new Car());
 
             Assert.Throws<InvalidOperationException>(() => parkingBoy.Park(new Car()));

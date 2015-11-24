@@ -1,23 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OOBootCamp.ParkingLot
 {
     public class ParkingBoy
     {
-        public ParkingLotManager ParkingLotManager { get; set; }
+        readonly List<ParkingLot> _parkingLotList;
+
+        public ParkingBoy(params ParkingLot[] parkingLotList)
+        {
+            _parkingLotList = parkingLotList.ToList();
+        }
+
+        public void AddParkingLot(ParkingLot parkingLot)
+        {
+            _parkingLotList.Add(parkingLot);
+            parkingLot.ParkingLotNumber = _parkingLotList.Count;
+        }
 
         public ParkingInfo Park(Car car)
         {
-            var availableParkingLot = ParkingLotManager.GetAvailableParkingLot();
+            var availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => parkingLot.NotFull());
             if (availableParkingLot == null) throw new InvalidOperationException("There is no available parking lot");
-            var token = availableParkingLot.Park(car);
-            return new ParkingInfo(availableParkingLot.ParkingLotNumber, token);
+            return new ParkingInfo(availableParkingLot.ParkingLotNumber, availableParkingLot.Park(car));
         }
 
         public Car PickCar(ParkingInfo parkingInfo)
         {
-            var parkingLot = ParkingLotManager.GetParkingLotByParkingNumber(parkingInfo.ParkingLotNumber);
-            return parkingLot.PickCar(parkingInfo.ParkingToken);
+            var parkedgLot = _parkingLotList.Single(parkingLot => parkingLot.ParkingLotNumber == parkingInfo.ParkingLotNumber);
+            return parkedgLot.PickCar(parkingInfo.ParkingToken);
         }
     }
 }
