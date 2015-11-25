@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Length.cs" />
+    <Compile Include="ParkingLot\SmartParkingBoy.cs" />
     <Compile Include="ParkingLot\ParkingBoy.cs" />
     <Compile Include="ParkingLot\ParkingInfo.cs" />
     <Compile Include="ParkingLot\Car.cs" />

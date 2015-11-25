@@ -6,7 +6,7 @@ namespace OOBootCamp.ParkingLot
     public class ParkingLot
     {
         readonly Dictionary<Guid, Car> _parkingCars;
-        private readonly int _size;
+        public readonly int _size;
 
         public ParkingLot(int size = 20)
         {
@@ -58,5 +58,12 @@ namespace OOBootCamp.ParkingLot
         {
             return _parkingCars.Count < _size;
         }
+
+        public int AvaliableParkingPosition
+        {
+            get { return _size - _parkingCars.Count; }
+        }
+
+
     }
 }
