@@ -11,9 +11,10 @@ namespace TestClass.ParkingLotFacts
         {
             var mycar = new Car();
             var parkingLot = new ParkingLot();
-            var token = parkingLot.Park(mycar);
 
-            var car = parkingLot.PickCar(token);
+            var parkingInfo = parkingLot.Park(mycar);
+
+            var car = parkingLot.PickCar(parkingInfo.ParkingToken);
 
             Assert.Same(mycar, car);
         }
@@ -44,33 +45,20 @@ namespace TestClass.ParkingLotFacts
             var parkingLot = new ParkingLot();
             var token1 = parkingLot.Park(mycar);
             var token2 = parkingLot.Park(anotherCar);
-            var car = parkingLot.PickCar(token1);
+            var car = parkingLot.PickCar(token1.ParkingToken);
             Assert.Same(mycar, car);
-            car = parkingLot.PickCar(token2);
+            car = parkingLot.PickCar(token2.ParkingToken);
             Assert.Same(anotherCar, car);
         }
 
         [Fact]
-        public void should_throw_exception_when_park_a_existed_car()
+        public void should_return_car_already_parked_when_park_a_existed_car()
         {
             var mycar = new Car();
             var parkingLot = new ParkingLot();
             parkingLot.Park(mycar);
-
-            Assert.Throws<InvalidOperationException>(
-                () => parkingLot.Park(mycar));
-        }
-
-        [Fact]
-        public void should_park_car_again_after_pick_a_car()
-        {
-            var mycar = new Car();
-            var parkingLot = new ParkingLot();
-            var token = parkingLot.Park(mycar);
-            parkingLot.PickCar(token);
-
-            parkingLot.Park(mycar);
-            Assert.NotEqual(Guid.Empty, token);
+            var parkingInfo = parkingLot.Park(mycar);
+            Assert.Equal(StatusCode.CarAlreadyParked, parkingInfo.StatusCode);
         }
 
         [Fact]
@@ -78,12 +66,24 @@ namespace TestClass.ParkingLotFacts
         {
             var mycar = new Car();
             var parkingLot = new ParkingLot();
-            var token = parkingLot.Park(mycar);
+            var parkingInfo = parkingLot.Park(mycar);
 
-            var car = parkingLot.PickCar(token);
+            var car = parkingLot.PickCar(parkingInfo.ParkingToken);
             Assert.Equal(mycar, car);
-            car = parkingLot.PickCar(token);
+            car = parkingLot.PickCar(parkingInfo.ParkingToken);
             Assert.Null(car);
+        }
+
+        [Fact]
+        public void should_park_failed_if_parking_lot_full()
+        {
+            var audi = new Car();
+            var parkingLot = new ParkingLot(1);
+            parkingLot.Park(audi);
+
+            var bmw = new Car();
+            var parkingInfo = parkingLot.Park(bmw);
+            Assert.Equal(StatusCode.ParkinglotIsFull, parkingInfo.StatusCode);
         }
     }
 }

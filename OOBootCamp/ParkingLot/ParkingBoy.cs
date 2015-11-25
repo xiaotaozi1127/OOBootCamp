@@ -22,8 +22,14 @@ namespace OOBootCamp.ParkingLot
         public ParkingInfo Park(Car car)
         {
             var availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => parkingLot.NotFull());
-            if (availableParkingLot == null) throw new InvalidOperationException("There is no available parking lot");
-            return new ParkingInfo(availableParkingLot.ParkingLotNumber, availableParkingLot.Park(car));
+            if (availableParkingLot == null)
+            {
+                var statusCode = StatusCode.ParkinglotIsFull;
+                return new ParkingInfo(0, Guid.Empty, statusCode);
+            }
+
+            ParkingInfo parkingInfo = availableParkingLot.Park(car);
+            return new ParkingInfo(availableParkingLot.ParkingLotNumber, parkingInfo.ParkingToken, parkingInfo.StatusCode);
         }
 
         public Car PickCar(ParkingInfo parkingInfo)

@@ -28,11 +28,8 @@ namespace TestClass.ParkingBoyFacts
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
 
-            Assert.Equal(parkingLot.ParkingLotNumber, bmwParkingInfo.ParkingLotNumber);
-            Assert.Equal(parkingLot.ParkingLotNumber, audiParkingInfo.ParkingLotNumber);
-
-            Assert.Equal(bmw, parkingBoy.PickCar(bmwParkingInfo));
-            Assert.Equal(audi, parkingBoy.PickCar(audiParkingInfo));
+            Assert.Same(bmw, parkingLot.PickCar(bmwParkingInfo.ParkingToken));
+            Assert.Same(audi, parkingLot.PickCar(audiParkingInfo.ParkingToken));
         }
 
         [Fact]
@@ -48,28 +45,21 @@ namespace TestClass.ParkingBoyFacts
             var bmwParkingInfo = parkingBoy.Park(bmw);
             var audiParkingInfo = parkingBoy.Park(audi);
 
-            Assert.Equal(parkingLot1.ParkingLotNumber, bmwParkingInfo.ParkingLotNumber);
-            Assert.Equal(parkingLot2.ParkingLotNumber, audiParkingInfo.ParkingLotNumber);
+            Assert.Same(bmw, parkingLot1.PickCar(bmwParkingInfo.ParkingToken));
+            Assert.Same(audi, parkingLot2.PickCar(audiParkingInfo.ParkingToken));
         }
 
         [Fact]
         public void should_park_car_to_first_available_parkingLot_if_there_are_mutiple_available_parkingLots()
         {
             var bmw = new Car();
-            var audi = new Car();
-            var changcheng = new Car();
-
             var parkingLot1 = new ParkingLot(1, 1);
-            var parkingLot2 = new ParkingLot(2, 1);
+            var parkingLot2 = new ParkingLot(1, 1);
+            var parkingBoy = new ParkingBoy(parkingLot1, parkingLot2);
 
-            var parkingBoy = new ParkingBoy(parkingLot1, parkingLot2, new ParkingLot(3, 1));
+            var bmwParkingInfo = parkingBoy.Park(bmw);
 
-            var bmwToken = parkingBoy.Park(bmw);
-            parkingBoy.Park(audi);
-            parkingBoy.PickCar(bmwToken);
-
-            var changchengparkingInfo = parkingBoy.Park(changcheng);
-            Assert.Equal(parkingLot1.ParkingLotNumber, changchengparkingInfo.ParkingLotNumber);
+            Assert.Same(bmw, parkingLot1.PickCar(bmwParkingInfo.ParkingToken));
         }
 
         [Fact]
@@ -78,7 +68,8 @@ namespace TestClass.ParkingBoyFacts
             var parkingBoy = new ParkingBoy(new ParkingLot(1, 1));
             parkingBoy.Park(new Car());
 
-            Assert.Throws<InvalidOperationException>(() => parkingBoy.Park(new Car()));
+            var parkingInfo = parkingBoy.Park(new Car());
+            Assert.Equal(StatusCode.ParkinglotIsFull, parkingInfo.StatusCode);
         }
     }
 }
