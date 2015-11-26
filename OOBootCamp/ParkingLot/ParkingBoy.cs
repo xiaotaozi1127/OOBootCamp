@@ -6,36 +6,29 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingBoy
     {
-        readonly List<ParkingLot> _parkingLotList;
+        private readonly List<ParkingLot> _parkingLotList;
 
         public ParkingBoy(params ParkingLot[] parkingLotList)
         {
             _parkingLotList = parkingLotList.ToList();
         }
 
-        public void AddParkingLot(ParkingLot parkingLot)
-        {
-            _parkingLotList.Add(parkingLot);
-            parkingLot.ParkingLotNumber = _parkingLotList.Count;
-        }
-
         public ParkingInfo Park(Car car)
         {
-            var availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => parkingLot.NotFull());
+            var availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => !parkingLot.IsFull());
             if (availableParkingLot == null)
             {
-                var statusCode = StatusCode.ParkinglotIsFull;
-                return new ParkingInfo(0, Guid.Empty, statusCode);
+                return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
             }
 
-            ParkingInfo parkingInfo = availableParkingLot.Park(car);
-            return new ParkingInfo(availableParkingLot.ParkingLotNumber, parkingInfo.ParkingToken, parkingInfo.StatusCode);
+            var parkingInfo = availableParkingLot.Park(car);
+            return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, parkingInfo.StatusCode);
         }
 
         public Car PickCar(ParkingInfo parkingInfo)
         {
-            var parkedgLot = _parkingLotList.Single(parkingLot => parkingLot.ParkingLotNumber == parkingInfo.ParkingLotNumber);
-            return parkedgLot.PickCar(parkingInfo.ParkingToken);
+            var correctParkingLot = _parkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
+            return correctParkingLot.PickCar(parkingInfo.ParkingToken);
         }
     }
 }

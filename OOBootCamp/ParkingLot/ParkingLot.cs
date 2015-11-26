@@ -5,8 +5,13 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingLot
     {
-        readonly Dictionary<Guid, Car> _parkingCars;
-        public readonly int _size;
+        private readonly Dictionary<Guid, Car> _parkingCars;
+
+        private readonly int _size;
+
+        public int ParkingLotId { get; internal set; }
+
+        public int AvaliableParkingSpots => _size - _parkingCars.Count;
 
         public ParkingLot(int size = 20)
         {
@@ -14,24 +19,22 @@ namespace OOBootCamp.ParkingLot
             _parkingCars = new Dictionary<Guid, Car>();
         }
 
-        public ParkingLot(int number, int size)
+        public ParkingLot(int id, int size)
         {
-            ParkingLotNumber = number;
+            ParkingLotId = id;
             _size = size;
             _parkingCars = new Dictionary<Guid, Car>();
         }
 
-        public int ParkingLotNumber { get; internal set; }
-
         public ParkingInfo Park(Car car)
         {
             var statusCode = StatusCode.Success;
-            Guid token = Guid.Empty;
+            var token = Guid.Empty;
             if (_parkingCars.ContainsValue(car))
             {
                 statusCode = StatusCode.CarAlreadyParked;
             }
-            if (!NotFull())
+            if (IsFull())
             {
                 statusCode = StatusCode.ParkinglotIsFull;
             }
@@ -40,30 +43,20 @@ namespace OOBootCamp.ParkingLot
                 token = Guid.NewGuid();
                 _parkingCars.Add(token, car);
             }
-            return new ParkingInfo(ParkingLotNumber, token, statusCode);
+            return new ParkingInfo(ParkingLotId, token, statusCode);
         }
 
         public Car PickCar(Guid token)
         {
-            Car result = null;
-            if (_parkingCars.ContainsKey(token))
-            {
-                result = _parkingCars[token];
-                _parkingCars.Remove(token);
-            }
+            if (!_parkingCars.ContainsKey(token)) return null;
+            var result = _parkingCars[token];
+            _parkingCars.Remove(token);
             return result;
         }
 
-        public bool NotFull()
+        public bool IsFull()
         {
-            return _parkingCars.Count < _size;
+            return _parkingCars.Count == _size;
         }
-
-        public int AvaliableParkingPosition
-        {
-            get { return _size - _parkingCars.Count; }
-        }
-
-
     }
 }

@@ -4,14 +4,14 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingInfo
     {
-        public ParkingInfo(int parkingLotNumber, Guid parkingToken, StatusCode statusCode)
+        public ParkingInfo(int parkingLotId, Guid parkingToken, StatusCode statusCode)
         {
             StatusCode = statusCode;
-            ParkingLotNumber = parkingLotNumber;
+            ParkingLotId = parkingLotId;
             ParkingToken = parkingToken;
         }
 
-        public readonly int ParkingLotNumber;
+        public readonly int ParkingLotId;
         public readonly Guid ParkingToken;
         public readonly StatusCode StatusCode;
     }
