@@ -36,7 +36,7 @@ namespace OOBootCamp.ParkingLot
             return new ParkingInfo(bigParkingLot.ParkingLotId, parkingInfo.ParkingToken, parkingInfo.StatusCode);
         }
 
-        public Car PickCar(ParkingInfo parkingInfo)
+        public Car Pick(ParkingInfo parkingInfo)
         {
             var correctParkingLot = _parkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
             return correctParkingLot.PickCar(parkingInfo.ParkingToken);

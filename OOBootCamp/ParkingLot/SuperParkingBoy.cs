@@ -31,10 +31,9 @@ namespace OOBootCamp.ParkingLot
                 return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, StatusCode.Success);
             }
             return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
-            
         }
 
-        public Car PickCar(ParkingInfo parkingInfo)
+        public Car Pick(ParkingInfo parkingInfo)
         {
             return _parkingLotList.Single(t => t.ParkingLotId == parkingInfo.ParkingLotId).PickCar(parkingInfo.ParkingToken);
         }

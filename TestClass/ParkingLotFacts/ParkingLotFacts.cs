@@ -2,7 +2,7 @@
 using OOBootCamp.ParkingLot;
 using Xunit;
 
-namespace TestClass.ParkingLotFacts
+namespace OOBootCamp.ParkingLotFacts
 {
     public class ParkingLotFacts
     {
@@ -10,7 +10,7 @@ namespace TestClass.ParkingLotFacts
         public void should_get_a_car_after_park_a_car()
         {
             var mycar = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
 
             var parkingInfo = parkingLot.Park(mycar);
 
@@ -22,7 +22,7 @@ namespace TestClass.ParkingLotFacts
         [Fact]
         public void should_not_get_a_car_if_no_car_parked()
         {
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             var car = parkingLot.PickCar(Guid.NewGuid());
             Assert.Null(car);
         }
@@ -31,7 +31,7 @@ namespace TestClass.ParkingLotFacts
         public void should_not_get_a_car_if_wrong_token_provided()
         {
             var mycar = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             parkingLot.Park(mycar);
             var car = parkingLot.PickCar(Guid.NewGuid());
             Assert.Null(car);
@@ -42,7 +42,7 @@ namespace TestClass.ParkingLotFacts
         {
             var mycar = new Car();
             var anotherCar = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             var token1 = parkingLot.Park(mycar);
             var token2 = parkingLot.Park(anotherCar);
             var car = parkingLot.PickCar(token1.ParkingToken);
@@ -55,7 +55,7 @@ namespace TestClass.ParkingLotFacts
         public void should_return_car_already_parked_when_park_a_existed_car()
         {
             var mycar = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             parkingLot.Park(mycar);
             var parkingInfo = parkingLot.Park(mycar);
             Assert.Equal(StatusCode.CarAlreadyParked, parkingInfo.StatusCode);
@@ -65,7 +65,7 @@ namespace TestClass.ParkingLotFacts
         public void should_not_get_the_car_if_already_picked()
         {
             var mycar = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             var parkingInfo = parkingLot.Park(mycar);
 
             var car = parkingLot.PickCar(parkingInfo.ParkingToken);
@@ -78,7 +78,7 @@ namespace TestClass.ParkingLotFacts
         public void should_park_failed_if_parking_lot_full()
         {
             var audi = new Car();
-            var parkingLot = new ParkingLot(1);
+            var parkingLot = new ParkingLot.ParkingLot(1);
             parkingLot.Park(audi);
 
             var bmw = new Car();

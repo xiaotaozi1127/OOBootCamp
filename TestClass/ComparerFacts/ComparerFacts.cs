@@ -1,7 +1,7 @@
 ﻿using OOBootCamp;
 using Xunit;
 
-namespace TestClass.ComparerFacts
+namespace OOBootCamp.SuperParkingBoyFacts.ComparerFacts
 {
     public class ComparerFacts
     {

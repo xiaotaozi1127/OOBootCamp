@@ -1,7 +1,7 @@
 ﻿using OOBootCamp.ParkingLot;
 using Xunit;
 
-namespace TestClass.SmartParkingBoyFacts
+namespace OOBootCamp.SmartParkingBoyFacts
 {
     public class SmartParkingBoyFacts
     {
@@ -9,7 +9,7 @@ namespace TestClass.SmartParkingBoyFacts
         public void parkingLot_should_get_car_after_smartBoy_park()
         {
             var bmw = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             var smartBoy = new SmartParkingBoy(parkingLot);
 
             var parkingInfo = smartBoy.Park(bmw);
@@ -21,31 +21,31 @@ namespace TestClass.SmartParkingBoyFacts
         public void smartParkingBoy_should_get_car_after_smartBoy_park()
         {
             var bmw = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             var smartBoy = new SmartParkingBoy(parkingLot);
 
             var parkingInfo = smartBoy.Park(bmw);
 
-            Assert.Same(bmw, smartBoy.PickCar(parkingInfo));
+            Assert.Same(bmw, smartBoy.Pick(parkingInfo));
         }
 
         [Fact]
         public void smartParkingBoy_should_get_car_after_parkingLot_park()
         {
             var bmw = new Car();
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot.ParkingLot();
             var smartBoy = new SmartParkingBoy(parkingLot);
 
             var parkingInfo = parkingLot.Park(bmw);
 
-            Assert.Same(bmw, smartBoy.PickCar(parkingInfo));
+            Assert.Same(bmw, smartBoy.Pick(parkingInfo));
         }
 
         [Fact]
         public void smartParkingBoy_should_park_fail_if_parkingLot_is_full()
         {
             var bmw = new Car();
-            var parkingLot = new ParkingLot(1, 1);
+            var parkingLot = new ParkingLot.ParkingLot(1, 1);
             var smartBoy = new SmartParkingBoy(parkingLot);
             smartBoy.Park(bmw);
 
@@ -58,21 +58,21 @@ namespace TestClass.SmartParkingBoyFacts
         public void should_park_success_for_same_size_empty_parkingLots()
         {
             var bmw = new Car();
-            var parkingLot1 = new ParkingLot(1, 1);
-            var parkingLot2 = new ParkingLot(2, 1);
+            var parkingLot1 = new ParkingLot.ParkingLot(1, 1);
+            var parkingLot2 = new ParkingLot.ParkingLot(2, 1);
             var smartBoy = new SmartParkingBoy(parkingLot1, parkingLot2);
 
             var bmwParkingInfo = smartBoy.Park(bmw);
 
-            Assert.Same(bmw, smartBoy.PickCar(bmwParkingInfo));
+            Assert.Same(bmw, smartBoy.Pick(bmwParkingInfo));
         }
 
         [Fact]
         public void should_park_in_bigger_empty_parkingLot_for_different_size_empty_parkingLots()
         {
             var bmw = new Car();
-            var parkingLot1 = new ParkingLot(1, 1);
-            var parkingLot2 = new ParkingLot(2, 2);
+            var parkingLot1 = new ParkingLot.ParkingLot(1, 1);
+            var parkingLot2 = new ParkingLot.ParkingLot(2, 2);
             var smartBoy = new SmartParkingBoy(parkingLot1, parkingLot2);
 
             var bmwParkingInfo = smartBoy.Park(bmw);
@@ -85,8 +85,8 @@ namespace TestClass.SmartParkingBoyFacts
         {
             var bmw = new Car();
             var audi = new Car();
-            var parkingLot1 = new ParkingLot(1, 2);
-            var parkingLot2 = new ParkingLot(2, 2);
+            var parkingLot1 = new ParkingLot.ParkingLot(1, 2);
+            var parkingLot2 = new ParkingLot.ParkingLot(2, 2);
             var smartBoy = new SmartParkingBoy(parkingLot1, parkingLot2);
             parkingLot1.Park(bmw);
 
@@ -101,15 +101,15 @@ namespace TestClass.SmartParkingBoyFacts
             var bmw = new Car();
             var audi = new Car();
             var benz = new Car();
-            var parkingLot1 = new ParkingLot(1, 2);
-            var parkingLot2 = new ParkingLot(2, 2);
+            var parkingLot1 = new ParkingLot.ParkingLot(1, 2);
+            var parkingLot2 = new ParkingLot.ParkingLot(2, 2);
             var smartBoy = new SmartParkingBoy(parkingLot1, parkingLot2);
             parkingLot1.Park(bmw);
             parkingLot2.Park(audi);
 
             var parkingInfo = smartBoy.Park(benz);
 
-            Assert.Same(benz, smartBoy.PickCar(parkingInfo));
+            Assert.Same(benz, smartBoy.Pick(parkingInfo));
         }
 
         [Fact]
@@ -118,8 +118,8 @@ namespace TestClass.SmartParkingBoyFacts
             var bmw = new Car();
             var audi = new Car();
             var benz = new Car();
-            var parkingLot1 = new ParkingLot(1, 2);
-            var parkingLot2 = new ParkingLot(2, 3);
+            var parkingLot1 = new ParkingLot.ParkingLot(1, 2);
+            var parkingLot2 = new ParkingLot.ParkingLot(2, 3);
             var smartBoy = new SmartParkingBoy(parkingLot1, parkingLot2);
             parkingLot1.Park(bmw);
             parkingLot2.Park(audi);
