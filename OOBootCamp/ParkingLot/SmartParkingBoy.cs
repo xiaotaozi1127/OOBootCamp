@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using OOSession.ParkingLot;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class SmartParkingBoy
+    public class SmartParkingBoy : ParkingBoyBase
     {
-        private readonly List<ParkingLot> _parkingLotList;
-
-        public SmartParkingBoy(params ParkingLot[] parkingLotList)
+        public SmartParkingBoy(params ParkingLot[] parkingLotList) :base(parkingLotList)
         {
-            _parkingLotList = parkingLotList.ToList();
         }
 
-        public ParkingInfo Park(Car car)
+        public override ParkingInfo Park(Car car)
         {
             var size = 0;
             ParkingLot bigParkingLot = null;
@@ -34,12 +30,6 @@ namespace OOBootCamp.ParkingLot
 
             ParkingInfo parkingInfo = bigParkingLot.Park(car);
             return new ParkingInfo(bigParkingLot.ParkingLotId, parkingInfo.ParkingToken, parkingInfo.StatusCode);
-        }
-
-        public Car Pick(ParkingInfo parkingInfo)
-        {
-            var correctParkingLot = _parkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
-            return correctParkingLot.PickCar(parkingInfo.ParkingToken);
         }
     }
 }

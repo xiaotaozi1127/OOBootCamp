@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using OOSession.ParkingLot;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class SuperParkingBoy
+    public class SuperParkingBoy : ParkingBoyBase
     {
-        private readonly List<ParkingLot> _parkingLotList;
-
-        public SuperParkingBoy(params ParkingLot[] parkingLot)
+        public SuperParkingBoy(params ParkingLot[] parkingLot) : base(parkingLot)
         {
-            _parkingLotList = parkingLot.ToList();
         }
         
-        public ParkingInfo Park(Car car)
+        public override ParkingInfo Park(Car car)
         {
             ParkingLot availableParkingLot = null;
             var vacancyParkingRate = 0;
@@ -31,11 +27,6 @@ namespace OOBootCamp.ParkingLot
                 return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, StatusCode.Success);
             }
             return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
-        }
-
-        public Car Pick(ParkingInfo parkingInfo)
-        {
-            return _parkingLotList.Single(t => t.ParkingLotId == parkingInfo.ParkingLotId).PickCar(parkingInfo.ParkingToken);
         }
     }
 }
