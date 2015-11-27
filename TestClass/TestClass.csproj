@@ -64,6 +64,7 @@
     <Compile Include="ParkingLotFacts\ParkingLotFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmartParkingBoyFacts\SmartParkingBoyFacts.cs" />
+    <Compile Include="SuperParkingBoyFacts\SuperParkingBoyFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

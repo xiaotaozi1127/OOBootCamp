@@ -46,6 +46,7 @@
     <Compile Include="ParkingLot\ParkingInfo.cs" />
     <Compile Include="ParkingLot\Car.cs" />
     <Compile Include="ParkingLot\ParkingLot.cs" />
+    <Compile Include="ParkingLot\SuperParkingBoy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

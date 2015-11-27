@@ -7,22 +7,22 @@ namespace OOBootCamp.ParkingLot
     {
         private readonly Dictionary<Guid, Car> _parkingCars;
 
-        private readonly int _size;
+        public readonly int Size;
 
         public int ParkingLotId { get; internal set; }
 
-        public int AvaliableParkingSpots => _size - _parkingCars.Count;
+        public int AvaliableParkingSpots => Size - _parkingCars.Count;
 
         public ParkingLot(int size = 20)
         {
-            _size = size;
+            Size = size;
             _parkingCars = new Dictionary<Guid, Car>();
         }
 
         public ParkingLot(int id, int size)
         {
             ParkingLotId = id;
-            _size = size;
+            Size = size;
             _parkingCars = new Dictionary<Guid, Car>();
         }
 
@@ -56,7 +56,7 @@ namespace OOBootCamp.ParkingLot
 
         public bool IsFull()
         {
-            return _parkingCars.Count == _size;
+            return _parkingCars.Count == Size;
         }
     }
 }
