@@ -46,7 +46,7 @@ namespace OOBootCamp.ParkingLot
             return new ParkingInfo(ParkingLotId, token, statusCode);
         }
 
-        public Car PickCar(Guid token)
+        public Car Pick(Guid token)
         {
             if (!_parkingCars.ContainsKey(token)) return null;
             var result = _parkingCars[token];

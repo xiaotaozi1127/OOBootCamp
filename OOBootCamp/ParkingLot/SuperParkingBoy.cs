@@ -10,15 +10,16 @@ namespace OOBootCamp.ParkingLot
         
         public override ParkingInfo Park(Car car)
         {
+            var vacancyRate = 0;
             ParkingLot availableParkingLot = null;
-            var vacancyParkingRate = 0;
-            foreach (var parkingLot in _parkingLotList)
+
+            foreach (var parkingLot in ParkingLotList)
             {
-                var vacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.Size;
-                if (vacancyRate > vacancyParkingRate)
+                var currentVacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.Size;
+                if (currentVacancyRate > vacancyRate)
                 {
                     availableParkingLot = parkingLot;
-                    vacancyParkingRate = vacancyRate;
+                    vacancyRate = currentVacancyRate;
                 }
             }
             if (availableParkingLot != null)

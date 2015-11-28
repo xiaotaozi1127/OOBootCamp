@@ -7,8 +7,8 @@
     <ProjectGuid>{941E3E50-B3EE-48FC-B92F-BB4E3D781EA4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OOSession</RootNamespace>
-    <AssemblyName>OOSession</AssemblyName>
+    <RootNamespace>OOBootCamp</RootNamespace>
+    <AssemblyName>OOBootCamp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

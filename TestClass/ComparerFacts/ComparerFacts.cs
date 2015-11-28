@@ -1,12 +1,12 @@
 ﻿using OOBootCamp;
 using Xunit;
 
-namespace OOBootCamp.SuperParkingBoyFacts.ComparerFacts
+namespace OOBootCampTest.ComparerFacts
 {
     public class ComparerFacts
     {
         [Fact]
-        public void should_get_equal_when_compare_two_lengths_if_they_are_equal()
+        public void should_get_equal_when_compare_two_equal_lengths()
         {            
             var lengthA = 1;
             var lengthB = 1;
@@ -15,7 +15,7 @@ namespace OOBootCamp.SuperParkingBoyFacts.ComparerFacts
         }
 
         [Fact]
-        public void should_get_unequal_when_compare_two_lengths_if_they_are_not_equal()
+        public void should_get_unequal_when_compare_two_unequal_lengths()
         {           
             var lengthA = 1;
             var lengthB = 2;
@@ -42,7 +42,7 @@ namespace OOBootCamp.SuperParkingBoyFacts.ComparerFacts
         }
 
         [Fact]
-        public void should_return_equal_when_compare_one_meter_length_with_one_hundred_centimete_length()
+        public void should_get_equal_when_compare_one_meter_length_with_one_hundred_centimete_length()
         {
             var lengthA = new Length(1, Unit.Meter);
             var lengthB = new Length(100, Unit.CentiMeter);
@@ -50,7 +50,7 @@ namespace OOBootCamp.SuperParkingBoyFacts.ComparerFacts
         }
 
         [Fact]
-        public void should_return_equal_when_compare_one_meter_length_with_one_thousand_millimeter_length()
+        public void should_get_equal_when_compare_one_meter_length_with_one_thousand_millimeter_length()
         {
             var lengthA = new Length(1, Unit.Meter);
             var lengthB = new Length(1000, Unit.MilliMeter);

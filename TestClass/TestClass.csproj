@@ -8,8 +8,8 @@
     <ProjectGuid>{212BA668-9CAA-42FD-9F44-F4931C71BB24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestClass</RootNamespace>
-    <AssemblyName>TestClass</AssemblyName>
+    <RootNamespace>OOBootCampTest</RootNamespace>
+    <AssemblyName>OOBootCampTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

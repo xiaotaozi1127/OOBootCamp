@@ -5,19 +5,19 @@ namespace OOBootCamp.ParkingLot
 {
     public abstract class ParkingBoyBase
     {
-        protected List<ParkingLot> _parkingLotList;
+        protected List<ParkingLot> ParkingLotList;
 
         protected ParkingBoyBase(params ParkingLot[] parkingLotList)
         {
-            _parkingLotList = parkingLotList.ToList();
+            ParkingLotList = parkingLotList.ToList();
         }
 
         public abstract ParkingInfo Park(Car car);
 
         public Car Pick(ParkingInfo parkingInfo)
         {
-            var correctParkingLot = _parkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
-            return correctParkingLot.PickCar(parkingInfo.ParkingToken);
+            var correctParkingLot = ParkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
+            return correctParkingLot.Pick(parkingInfo.ParkingToken);
         }
     }
 }

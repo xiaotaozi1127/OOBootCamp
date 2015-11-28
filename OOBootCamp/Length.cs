@@ -1,4 +1,6 @@
-﻿namespace OOBootCamp
+﻿using System;
+
+namespace OOBootCamp
 {
     public enum Unit
     {
@@ -14,9 +16,9 @@
             Number = number;
             Unit = unit;
         }
-        public float Number { get; set; }
+        public double Number { get; set; }
         public Unit Unit { get; set; }
-        public float ToUniversalLength()
+        public double ToUniversalLength()
         {
             return (int)Unit * Number;
         }
@@ -24,7 +26,7 @@
         public override bool Equals(object obj)
         {
             if (obj == null || obj is Length == false) return false;
-            return ToUniversalLength() ==  (obj as Length).ToUniversalLength();
+            return Math.Abs(ToUniversalLength() - ((Length) obj).ToUniversalLength()) < 0.001;
         }
 
         public override int GetHashCode()

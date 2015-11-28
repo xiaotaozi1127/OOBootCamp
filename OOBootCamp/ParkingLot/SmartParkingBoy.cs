@@ -13,7 +13,7 @@ namespace OOBootCamp.ParkingLot
             var avaliablity = 0;
             ParkingLot availableParkingLot = null;
 
-            foreach (var parkingLot in _parkingLotList)
+            foreach (var parkingLot in ParkingLotList)
             {
                 if (parkingLot.AvaliableParkingSpots > avaliablity)
                 {
