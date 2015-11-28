@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using OOSession.ParkingLot;
 
 namespace OOBootCamp.ParkingLot
 {
@@ -12,7 +11,7 @@ namespace OOBootCamp.ParkingLot
 
         public override ParkingInfo Park(Car car)
         {
-            var availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => !parkingLot.IsFull());
+            var availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => parkingLot.AvaliableParkingSpots > 0);
             if (availableParkingLot == null)
             {
                 return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);

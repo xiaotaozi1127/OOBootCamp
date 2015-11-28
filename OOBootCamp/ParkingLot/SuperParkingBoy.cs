@@ -1,5 +1,4 @@
 ﻿using System;
-using OOSession.ParkingLot;
 
 namespace OOBootCamp.ParkingLot
 {
@@ -16,9 +15,10 @@ namespace OOBootCamp.ParkingLot
             foreach (var parkingLot in _parkingLotList)
             {
                 var vacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.Size;
-                if (!parkingLot.IsFull() && vacancyRate > vacancyParkingRate)
+                if (vacancyRate > vacancyParkingRate)
                 {
                     availableParkingLot = parkingLot;
+                    vacancyParkingRate = vacancyRate;
                 }
             }
             if (availableParkingLot != null)

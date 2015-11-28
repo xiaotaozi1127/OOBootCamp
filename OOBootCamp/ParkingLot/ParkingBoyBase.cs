@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using OOBootCamp.ParkingLot;
 
-namespace OOSession.ParkingLot
+namespace OOBootCamp.ParkingLot
 {
     public abstract class ParkingBoyBase
     {
-        protected List<OOBootCamp.ParkingLot.ParkingLot> _parkingLotList;
+        protected List<ParkingLot> _parkingLotList;
 
-        protected ParkingBoyBase(params OOBootCamp.ParkingLot.ParkingLot[] parkingLotList)
+        protected ParkingBoyBase(params ParkingLot[] parkingLotList)
         {
             _parkingLotList = parkingLotList.ToList();
         }
