@@ -16,7 +16,7 @@ namespace OOBootCamp.ParkingLot
             foreach (var parkingLot in _parkingLotList)
             {
                 var vacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.Size;
-                if (!parkingLot.IsFull() && vacancyRate > vacancyParkingRate)
+                if (vacancyRate > vacancyParkingRate)
                 {
                     availableParkingLot = parkingLot;
                 }

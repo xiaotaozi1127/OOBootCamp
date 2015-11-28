@@ -11,15 +11,15 @@ namespace OOBootCamp.ParkingLot
 
         public override ParkingInfo Park(Car car)
         {
-            var size = 0;
+            var avaliablity = 0;
             ParkingLot bigParkingLot = null;
 
             foreach (var parkingLot in _parkingLotList)
             {
-                if (!parkingLot.IsFull() && parkingLot.AvaliableParkingSpots > size)
+                if (parkingLot.AvaliableParkingSpots > avaliablity)
                 {
                     bigParkingLot = parkingLot;
-                    size = parkingLot.AvaliableParkingSpots;
+                    avaliablity = parkingLot.AvaliableParkingSpots;
                 }
             }
 

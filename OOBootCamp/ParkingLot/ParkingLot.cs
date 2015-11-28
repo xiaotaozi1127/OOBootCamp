@@ -34,7 +34,7 @@ namespace OOBootCamp.ParkingLot
             {
                 statusCode = StatusCode.CarAlreadyParked;
             }
-            if (IsFull())
+            if (_parkingCars.Count == Size)
             {
                 statusCode = StatusCode.ParkinglotIsFull;
             }
@@ -54,9 +54,9 @@ namespace OOBootCamp.ParkingLot
             return result;
         }
 
-        public bool IsFull()
-        {
-            return _parkingCars.Count == Size;
-        }
+//        public bool IsFull()
+//        {
+//            return _parkingCars.Count == Size;
+//        }
     }
 }
