@@ -21,14 +21,7 @@ namespace OOBootCamp.ParkingLot
                     avaliablity = parkingLot.AvaliableParkingSpots;
                 }
             }
-
-            if (availableParkingLot == null)
-            {
-                return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
-            }
-
-            var parkingInfo = availableParkingLot.Park(car);
-            return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, parkingInfo.StatusCode);
+            return GetParkingInfo(car, availableParkingLot);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,17 @@ namespace OOBootCamp.ParkingLot
         {
             var correctParkingLot = ParkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
             return correctParkingLot.Pick(parkingInfo.ParkingToken);
+        }
+
+        protected ParkingInfo GetParkingInfo(Car car, ParkingLot availableParkingLot)
+        {
+            if (availableParkingLot == null)
+            {
+                return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
+            }
+
+            var parkingInfo = availableParkingLot.Park(car);
+            return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, parkingInfo.StatusCode);
         }
     }
 }

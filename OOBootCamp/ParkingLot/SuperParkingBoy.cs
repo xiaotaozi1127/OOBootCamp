@@ -22,12 +22,7 @@ namespace OOBootCamp.ParkingLot
                     vacancyRate = currentVacancyRate;
                 }
             }
-            if (availableParkingLot != null)
-            {
-                var parkingInfo = availableParkingLot.Park(car);
-                return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, StatusCode.Success);
-            }
-            return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
+            return GetParkingInfo(car, availableParkingLot);
         }
     }
 }
