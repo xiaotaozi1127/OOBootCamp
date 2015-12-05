@@ -1,19 +1,23 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class SuperParkingBoy : ParkingBoyBase
+    public class SuperParkingBoy
     {
-        public SuperParkingBoy(params ParkingLot[] parkingLot) : base(parkingLot)
+        private readonly List<ParkingLot> _parkingLotList;
+
+        public SuperParkingBoy(params ParkingLot[] parkingLotList)
         {
+            _parkingLotList = parkingLotList.ToList();
         }
         
-        public override ParkingInfo Park(Car car)
+        public ParkingInfo Park(Car car)
         {
             var vacancyRate = 0;
             ParkingLot availableParkingLot = null;
 
-            foreach (var parkingLot in ParkingLotList)
+            foreach (var parkingLot in _parkingLotList)
             {
                 var currentVacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.Size;
                 if (currentVacancyRate > vacancyRate)
@@ -22,7 +26,12 @@ namespace OOBootCamp.ParkingLot
                     vacancyRate = currentVacancyRate;
                 }
             }
-            return GetParkingInfo(car, availableParkingLot);
+            return ParkingBoyHelper.GetParkingInfo(car, availableParkingLot);
+        }
+
+        public Car Pick(ParkingInfo parkingInfo)
+        {
+            return ParkingBoyHelper.Pick(parkingInfo, _parkingLotList);
         }
     }
 }

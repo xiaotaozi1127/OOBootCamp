@@ -1,19 +1,23 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class SmartParkingBoy : ParkingBoyBase
+    public class SmartParkingBoy
     {
-        public SmartParkingBoy(params ParkingLot[] parkingLotList) :base(parkingLotList)
+        private readonly List<ParkingLot> _parkingLotList;
+
+        public SmartParkingBoy(params ParkingLot[] parkingLotList)
         {
+            _parkingLotList = parkingLotList.ToList();
         }
 
-        public override ParkingInfo Park(Car car)
+        public ParkingInfo Park(Car car)
         {
             var avaliablity = 0;
             ParkingLot availableParkingLot = null;
 
-            foreach (var parkingLot in ParkingLotList)
+            foreach (var parkingLot in _parkingLotList)
             {
                 if (parkingLot.AvaliableParkingSpots > avaliablity)
                 {
@@ -21,7 +25,12 @@ namespace OOBootCamp.ParkingLot
                     avaliablity = parkingLot.AvaliableParkingSpots;
                 }
             }
-            return GetParkingInfo(car, availableParkingLot);
+            return ParkingBoyHelper.GetParkingInfo(car, availableParkingLot);
+        }
+
+        public Car Pick(ParkingInfo parkingInfo)
+        {
+            return ParkingBoyHelper.Pick(parkingInfo, _parkingLotList);
         }
     }
 }

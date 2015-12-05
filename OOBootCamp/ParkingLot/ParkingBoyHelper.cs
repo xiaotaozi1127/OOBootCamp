@@ -4,24 +4,15 @@ using System.Linq;
 
 namespace OOBootCamp.ParkingLot
 {
-    public abstract class ParkingBoyBase
+    public class ParkingBoyHelper
     {
-        protected List<ParkingLot> ParkingLotList;
-
-        protected ParkingBoyBase(params ParkingLot[] parkingLotList)
+        public static Car Pick(ParkingInfo parkingInfo, List<ParkingLot> parkingLotList )
         {
-            ParkingLotList = parkingLotList.ToList();
-        }
-
-        public abstract ParkingInfo Park(Car car);
-
-        public Car Pick(ParkingInfo parkingInfo)
-        {
-            var correctParkingLot = ParkingLotList.Single(parkingLot => parkingLot.ParkingLotGuid == parkingInfo.ParkingLotGuid);
+            var correctParkingLot = parkingLotList.Single(parkingLot => parkingLot.ParkingLotGuid == parkingInfo.ParkingLotGuid);
             return correctParkingLot.Pick(parkingInfo.ParkingToken);
         }
 
-        protected ParkingInfo GetParkingInfo(Car car, ParkingLot availableParkingLot)
+        public static ParkingInfo GetParkingInfo(Car car, ParkingLot availableParkingLot)
         {
             if (availableParkingLot == null)
             {
