@@ -17,7 +17,7 @@ namespace OOBootCamp.ParkingLot
 
         public Car Pick(ParkingInfo parkingInfo)
         {
-            var correctParkingLot = ParkingLotList.Single(parkingLot => parkingLot.ParkingLotId == parkingInfo.ParkingLotId);
+            var correctParkingLot = ParkingLotList.Single(parkingLot => parkingLot.ParkingLotGuid == parkingInfo.ParkingLotGuid);
             return correctParkingLot.Pick(parkingInfo.ParkingToken);
         }
 
@@ -25,11 +25,11 @@ namespace OOBootCamp.ParkingLot
         {
             if (availableParkingLot == null)
             {
-                return new ParkingInfo(0, Guid.Empty, StatusCode.ParkinglotIsFull);
+                return new ParkingInfo(Guid.Empty, Guid.Empty, StatusCode.ParkinglotIsFull);
             }
 
             var parkingInfo = availableParkingLot.Park(car);
-            return new ParkingInfo(availableParkingLot.ParkingLotId, parkingInfo.ParkingToken, parkingInfo.StatusCode);
+            return new ParkingInfo(availableParkingLot.ParkingLotGuid, parkingInfo.ParkingToken, parkingInfo.StatusCode);
         }
     }
 }

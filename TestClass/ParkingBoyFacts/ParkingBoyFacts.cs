@@ -9,7 +9,7 @@ namespace OOBootCampTest.ParkingBoyFacts
         public void parkingLot_should_pick_car_success_after_parkingBoy_park_car()
         {
             var car = new Car();
-            var parkingLot = new ParkingLot(1, 1);
+            var parkingLot = new ParkingLot(1);
             var parkingBoy = new ParkingBoy(parkingLot);
 
             var parkingInfo = parkingBoy.Park(car);
@@ -21,7 +21,7 @@ namespace OOBootCampTest.ParkingBoyFacts
         public void parkingBoy_should_pick_car_success_after_parkingBoy_park_car()
         {
             var car = new Car();
-            var parkingLot = new ParkingLot(1, 1);
+            var parkingLot = new ParkingLot(1);
             var parkingBoy = new ParkingBoy(parkingLot);
 
             var parkingInfo = parkingBoy.Park(car);
@@ -43,8 +43,8 @@ namespace OOBootCampTest.ParkingBoyFacts
         public void should_park_to_first_available_parkingLot_for_mutiple_available_parkingLots()
         {
             var bmw = new Car();
-            var parkingLot1 = new ParkingLot(1, 1);
-            var parkingLot2 = new ParkingLot(1, 1);
+            var parkingLot1 = new ParkingLot(1);
+            var parkingLot2 = new ParkingLot(1);
             var parkingBoy = new ParkingBoy(parkingLot1, parkingLot2);
 
             var bmwParkingInfo = parkingBoy.Park(bmw);

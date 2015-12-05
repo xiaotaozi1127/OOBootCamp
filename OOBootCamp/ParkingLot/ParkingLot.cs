@@ -9,19 +9,13 @@ namespace OOBootCamp.ParkingLot
 
         public readonly int Size;
 
-        public int ParkingLotId { get; internal set; }
+        public readonly Guid ParkingLotGuid;
 
         public int AvaliableParkingSpots => Size - _parkingCars.Count;
 
         public ParkingLot(int size = 20)
         {
-            Size = size;
-            _parkingCars = new Dictionary<Guid, Car>();
-        }
-
-        public ParkingLot(int id, int size)
-        {
-            ParkingLotId = id;
+            ParkingLotGuid = Guid.NewGuid();
             Size = size;
             _parkingCars = new Dictionary<Guid, Car>();
         }
@@ -30,10 +24,6 @@ namespace OOBootCamp.ParkingLot
         {
             var statusCode = StatusCode.Success;
             var token = Guid.Empty;
-            if (_parkingCars.ContainsValue(car))
-            {
-                statusCode = StatusCode.CarAlreadyParked;
-            }
             if (_parkingCars.Count == Size)
             {
                 statusCode = StatusCode.ParkinglotIsFull;
@@ -43,7 +33,7 @@ namespace OOBootCamp.ParkingLot
                 token = Guid.NewGuid();
                 _parkingCars.Add(token, car);
             }
-            return new ParkingInfo(ParkingLotId, token, statusCode);
+            return new ParkingInfo(ParkingLotGuid, token, statusCode);
         }
 
         public Car Pick(Guid token)

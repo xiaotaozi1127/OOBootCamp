@@ -46,7 +46,7 @@ namespace OOBootCampTest.SuperParkingBoyFacts
         public void should_park_in_anyParkingLot_for_multiple_empty_parkingLots_with_same_size()
         {
             var car = new Car();
-            var superboy = new SuperParkingBoy(new ParkingLot(1, 10), new ParkingLot(2, 10));
+            var superboy = new SuperParkingBoy(new ParkingLot(10), new ParkingLot(10));
 
             var parkingInfo = superboy.Park(car);
 
@@ -57,7 +57,7 @@ namespace OOBootCampTest.SuperParkingBoyFacts
         public void should_park_in_any_parkingLot_for_multiple_empty_parkingLots_with_different_size()
         {
             var car = new Car();
-            var superboy = new SuperParkingBoy(new ParkingLot(1, 10), new ParkingLot(2, 20));
+            var superboy = new SuperParkingBoy(new ParkingLot(10), new ParkingLot(20));
 
             var parkingInfo = superboy.Park(car);
 
@@ -69,8 +69,8 @@ namespace OOBootCampTest.SuperParkingBoyFacts
         {
             var bmw = new Car();
             var audi = new Car();
-            var parkingLot1 = new ParkingLot(1, 10);
-            var parkingLot2 = new ParkingLot(2, 10);
+            var parkingLot1 = new ParkingLot(10);
+            var parkingLot2 = new ParkingLot(10);
             var superboy = new SuperParkingBoy(parkingLot1, parkingLot2);
 
             parkingLot1.Park(bmw);
@@ -84,8 +84,8 @@ namespace OOBootCampTest.SuperParkingBoyFacts
         {
             var bmw = new Car();
             var audi = new Car();
-            var parkingLot1 = new ParkingLot(1, 10);
-            var parkingLot2 = new ParkingLot(2, 20);
+            var parkingLot1 = new ParkingLot(10);
+            var parkingLot2 = new ParkingLot(20);
             var superboy = new SuperParkingBoy(parkingLot1, parkingLot2);
 
             parkingLot2.Park(bmw);

@@ -52,18 +52,6 @@ namespace OOBootCampTest.ParkingLotFacts
         }
 
         [Fact]
-        public void should_not_park_the_same_car_twice()
-        {
-            var car = new Car();
-            var parkingLot = new ParkingLot();
-
-            parkingLot.Park(car);
-            var parkingInfo = parkingLot.Park(car);
-
-            Assert.Equal(StatusCode.CarAlreadyParked, parkingInfo.StatusCode);
-        }
-
-        [Fact]
         public void should_not_pick_the_same_car_twice()
         {
             var car = new Car();

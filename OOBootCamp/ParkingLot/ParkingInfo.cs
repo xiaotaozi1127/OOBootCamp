@@ -4,14 +4,14 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingInfo
     {
-        public ParkingInfo(int parkingLotId, Guid parkingToken, StatusCode statusCode)
+        public ParkingInfo(Guid parkingLotGuid, Guid parkingToken, StatusCode statusCode)
         {
+            ParkingLotGuid = parkingLotGuid;
             StatusCode = statusCode;
-            ParkingLotId = parkingLotId;
             ParkingToken = parkingToken;
         }
 
-        public readonly int ParkingLotId;
+        public readonly Guid ParkingLotGuid;
         public readonly Guid ParkingToken;
         public readonly StatusCode StatusCode;
     }
@@ -19,7 +19,6 @@ namespace OOBootCamp.ParkingLot
     public enum StatusCode
     {
         Success,
-        CarAlreadyParked,
         ParkinglotIsFull
     }
 }
