@@ -22,5 +22,10 @@ namespace OOBootCamp.ParkingLot
         {
             return ParkingBoyHelper.Pick(parkingInfo, _parkingLotList);
         }
+
+        public bool CanPark()
+        {
+            return _parkingLotList.Exists(t => t.AvaliableParkingSpots > 0);
+        }
     }
 }

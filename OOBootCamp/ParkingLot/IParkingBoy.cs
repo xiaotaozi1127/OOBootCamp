@@ -4,5 +4,6 @@ namespace OOBootCamp.ParkingLot
     {
         ParkingInfo Park(Car car);
         Car Pick(ParkingInfo parkingInfo);
+        bool CanPark();
     }
 }

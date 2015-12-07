@@ -8,7 +8,8 @@ namespace OOBootCamp.ParkingLot
     {
         public static Car Pick(ParkingInfo parkingInfo, List<ParkingLot> parkingLotList )
         {
-            var correctParkingLot = parkingLotList.Single(parkingLot => parkingLot.ParkingLotGuid == parkingInfo.ParkingLotGuid);
+            var correctParkingLot = parkingLotList.SingleOrDefault(parkingLot => parkingLot.ParkingLotGuid == parkingInfo.ParkingLotGuid);
+            if(correctParkingLot == null) return null;
             return correctParkingLot.Pick(parkingInfo.ParkingToken);
         }
 
