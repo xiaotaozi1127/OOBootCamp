@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class ParkingBoy : IParkingBoy
+    public class ParkingBoyManager
     {
         private readonly List<ParkingLot> _parkingLotList;
 
-        public ParkingBoy(params ParkingLot[] parkingLotList)
+        public ParkingBoyManager(params ParkingLot[] parkingLot)
         {
-            _parkingLotList = parkingLotList.ToList();
+            _parkingLotList = parkingLot.ToList();
         }
 
         public ParkingInfo Park(Car car)
@@ -21,6 +21,16 @@ namespace OOBootCamp.ParkingLot
         public Car Pick(ParkingInfo parkingInfo)
         {
             return ParkingBoyHelper.Pick(parkingInfo, _parkingLotList);
+        }
+
+        public ParkingInfo ParkBy(IParkingBoy parkingBoy, Car car)
+        {
+            return parkingBoy.Park(car);
+        }
+
+        public Car PickBy(IParkingBoy parkingBoy, ParkingInfo parkingInfo)
+        {
+            return parkingBoy.Pick(parkingInfo);
         }
     }
 }

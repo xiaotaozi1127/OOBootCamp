@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class SuperParkingBoy
+    public class SuperParkingBoy : IParkingBoy
     {
         private readonly List<ParkingLot> _parkingLotList;
 
