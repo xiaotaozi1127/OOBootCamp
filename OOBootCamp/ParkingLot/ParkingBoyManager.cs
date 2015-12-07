@@ -26,12 +26,8 @@ namespace OOBootCamp.ParkingLot
 
             if (availableParkingLot == null)
             {
-                IParkingBoy boy = _availableBoys.FirstOrDefault(t => t.CanPark());
-                if (boy != null)
-                {
-                    return boy.Park(car);
-                }
-                return new ParkingInfo(Guid.Empty, Guid.Empty, StatusCode.ParkinglotIsFull);
+                var boy = _availableBoys.FirstOrDefault(t => t.CanPark());
+                return boy != null ? boy.Park(car) : new ParkingInfo(Guid.Empty, Guid.Empty, StatusCode.ParkinglotIsFull);
             }
             return ParkingBoyHelper.GetParkingInfo(car, availableParkingLot);
         }

@@ -13,9 +13,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
             var parkingLot = new ParkingLot(1);
             var manager = new ParkingBoyManager(null, parkingLot);
 
-            var parkingInfo = manager.Park(car);
-
-            Assert.Same(car, parkingLot.Pick(parkingInfo.ParkingToken));
+            Assert.Same(car, parkingLot.Pick(manager.Park(car).ParkingToken));
         }
 
         [Fact]
@@ -24,46 +22,40 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
             var car = new Car();
             var manager = new ParkingBoyManager(null, new ParkingLot(1));
 
-            var parkingInfo = manager.Park(car);
-
-            Assert.Same(car, manager.Pick(parkingInfo));
+            Assert.Same(car, manager.Pick(manager.Park(car)));
         }
 
         [Fact]
-        public void should_ask_parkingBoy_to_park_and_pick()
+        public void should_ask_parkingBoy_to_park()
         {
             var car = new Car();
             var manager = new ParkingBoyManager(
                 new List<IParkingBoy> { new ParkingBoy(new ParkingLot(1)) }, 
                 null);
 
-            var parkingInfo = manager.Park(car);
-            Assert.Same(car, manager.Pick(parkingInfo));
+            Assert.Same(car, manager.Pick(manager.Park(car)));
         }
 
         [Fact]
-        public void should_ask_smart_boy_to_park_and_pick()
+        public void should_ask_smart_boy_to_park()
         {
             var car = new Car();
-            var smartparkingBoy = new SmartParkingBoy(new ParkingLot(1));
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy> { smartparkingBoy },
+                new List<IParkingBoy> { new SmartParkingBoy(new ParkingLot(1)) },
                 null);
 
-            var parkingInfo = manager.Park(car);
-            Assert.Same(car, manager.Pick(parkingInfo));
+            Assert.Same(car, manager.Pick(manager.Park(car)));
         }
 
         [Fact]
-        public void should_ask_super_boy_to_park_and_pick()
+        public void should_ask_super_boy_to_park()
         {
             var car = new Car();
             var manager = new ParkingBoyManager(
                 new List<IParkingBoy> { new SuperParkingBoy(new ParkingLot()) },
                 null);
 
-            var parkingInfo = manager.Park(car);
-            Assert.Same(car, manager.Pick(parkingInfo));
+            Assert.Same(car, manager.Pick(manager.Park(car)));
         }
 
         [Fact]
@@ -75,9 +67,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
                 new List<IParkingBoy> { superParkingBoy},
                 null);
 
-            var parkingInfo = manager.Park(car);
-
-            Assert.Same(car, superParkingBoy.Pick(parkingInfo));
+            Assert.Same(car, superParkingBoy.Pick(manager.Park(car)));
         }
 
         [Fact]
@@ -89,12 +79,29 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
             var manager = new ParkingBoyManager(
                 new List<IParkingBoy>
                 {
-                    new SmartParkingBoy(new ParkingLot(10)), superParkingBoy
+                    superParkingBoy, new SmartParkingBoy(new ParkingLot(10))
                 }, 
                 null);
 
-            var parkingInfo = manager.Park(car);
-            Assert.Same(car, manager.Pick(parkingInfo));
+            Assert.Same(car, manager.Pick(manager.Park(car)));
+        }
+
+        [Fact]
+        public void should_park_failed_if_available_parkingLot_is_null()
+        {
+            var car = new Car();
+            var smartParkingBoy = new SmartParkingBoy(new ParkingLot(1));
+            smartParkingBoy.Park(new Car());
+            var superParkingBoy = new SuperParkingBoy(new ParkingLot(1));
+            superParkingBoy.Park(new Car());
+            var manager = new ParkingBoyManager(
+                new List<IParkingBoy>
+                {
+                    smartParkingBoy, superParkingBoy
+                },
+                null);
+
+            Assert.Equal(StatusCode.ParkinglotIsFull, manager.Park(car).StatusCode);
         }
     }
 }

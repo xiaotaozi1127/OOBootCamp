@@ -9,8 +9,7 @@ namespace OOBootCamp.ParkingLot
         public static Car Pick(ParkingInfo parkingInfo, List<ParkingLot> parkingLotList )
         {
             var correctParkingLot = parkingLotList.SingleOrDefault(parkingLot => parkingLot.ParkingLotGuid == parkingInfo.ParkingLotGuid);
-            if(correctParkingLot == null) return null;
-            return correctParkingLot.Pick(parkingInfo.ParkingToken);
+            return correctParkingLot?.Pick(parkingInfo.ParkingToken);
         }
 
         public static ParkingInfo GetParkingInfo(Car car, ParkingLot availableParkingLot)
@@ -21,7 +20,10 @@ namespace OOBootCamp.ParkingLot
             }
 
             var parkingInfo = availableParkingLot.Park(car);
-            return new ParkingInfo(availableParkingLot.ParkingLotGuid, parkingInfo.ParkingToken, parkingInfo.StatusCode);
+            return new ParkingInfo(
+                availableParkingLot.ParkingLotGuid,
+                parkingInfo.ParkingToken,
+                parkingInfo.StatusCode);
         }
     }
 }
