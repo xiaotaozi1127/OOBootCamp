@@ -6,36 +6,21 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingBoyManager
     {
-        private readonly List<ParkingLot> _parkingLotList;
-
         private readonly List<IParkingBoy> _availableBoys;
 
-        public ParkingBoyManager(List<IParkingBoy> availableBoys, params ParkingLot[] parkingLot )
+        public ParkingBoyManager(List<IParkingBoy> boys)
         {
-            _availableBoys = availableBoys;
-            _parkingLotList = parkingLot?.ToList();
+            _availableBoys = boys;
         }
 
         public ParkingInfo Park(Car car)
         {
-            ParkingLot availableParkingLot = null;
-            if (_parkingLotList != null)
-            {
-                availableParkingLot = _parkingLotList.FirstOrDefault(parkingLot => parkingLot.AvaliableParkingSpots > 0);
-            }
-
-            if (availableParkingLot == null)
-            {
-                var boy = _availableBoys.FirstOrDefault(t => t.CanPark());
-                return boy != null ? boy.Park(car) : new ParkingInfo(Guid.Empty, Guid.Empty, StatusCode.ParkinglotIsFull);
-            }
-            return ParkingBoyHelper.GetParkingInfo(car, availableParkingLot);
+            var boy = _availableBoys.FirstOrDefault(t => t.CanPark());
+            return boy != null ? boy.Park(car) : new ParkingInfo(Guid.Empty, Guid.Empty, StatusCode.ParkinglotIsFull);
         }
 
         public Car Pick(ParkingInfo parkingInfo)
         {
-            if (_parkingLotList != null && _parkingLotList.Exists(t => t.ParkingLotGuid == parkingInfo.ParkingLotGuid))
-                return ParkingBoyHelper.Pick(parkingInfo, _parkingLotList);
             return _availableBoys.Select(boy => boy.Pick(parkingInfo)).FirstOrDefault(car => car != null);
         }
     }

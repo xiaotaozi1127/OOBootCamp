@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class ParkingLot
+    public class ParkingLot : IParkingBoy
     {
         private readonly Dictionary<Guid, Car> _parkingCars;
 
@@ -34,6 +34,16 @@ namespace OOBootCamp.ParkingLot
                 _parkingCars.Add(token, car);
             }
             return new ParkingInfo(ParkingLotGuid, token, statusCode);
+        }
+
+        public Car Pick(ParkingInfo parkingInfo)
+        {
+            return Pick(parkingInfo.ParkingToken);
+        }
+
+        public bool CanPark()
+        {
+            return AvaliableParkingSpots > 0;
         }
 
         public Car Pick(Guid token)
