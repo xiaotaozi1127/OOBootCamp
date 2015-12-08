@@ -25,5 +25,10 @@ namespace OOBootCamp.ParkingLot
                 parkingInfo.ParkingToken,
                 parkingInfo.StatusCode);
         }
+
+        public static bool CanPark(List<ParkingLot> parkingLotList)
+        {
+            return parkingLotList.Exists(t => t.AvaliableParkingSpots > 0);
+        }
     }
 }

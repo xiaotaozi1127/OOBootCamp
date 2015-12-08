@@ -36,7 +36,7 @@ namespace OOBootCamp.ParkingLot
 
         public bool CanPark()
         {
-            return _parkingLotList.Exists(t => t.AvaliableParkingSpots > 0);
+            return ParkingBoyHelper.CanPark(_parkingLotList);
         }
     }
 }
