@@ -35,7 +35,7 @@ namespace OOBootCamp.ParkingLot
             stringBuilder.AppendFormat("M {0} {1}\r\n", _availableBoys.Sum(t => t.GetParkedNumber()), _availableBoys.Sum(t=> t.GetTotalsize()));
 
             var parkingLots = _availableBoys.Where(t => t is ParkingLot).ToList();
-            GetParkingLotStatus(stringBuilder, parkingLots);
+            AppendParkingLots(stringBuilder, parkingLots, "  ");
 
             var parkingBoys = _availableBoys.Except(parkingLots).ToList();
             GetParkingBoyStatus(stringBuilder, parkingBoys);
@@ -48,21 +48,23 @@ namespace OOBootCamp.ParkingLot
         {
             foreach (var boy in parkingBoys)
             {
-                stringBuilder.AppendFormat("  B {0} {1}\r\n", boy.GetParkedNumber(), boy.GetTotalsize());
+                AppendParkable(stringBuilder, "  ", boy, "B");
                 var parkinglots = boy.GetParkingLotList();
-                foreach (var parkinglot in parkinglots)
-                {
-                    stringBuilder.AppendFormat("    P {0} {1}\r\n", parkinglot.GetParkedNumber(), parkinglot.GetTotalsize());
-                }
+                AppendParkingLots(stringBuilder, parkinglots, "    ");
             }
         }
 
-        private void GetParkingLotStatus(StringBuilder stringBuilder, List<IParkable> parkingLots)
+        public static void AppendParkingLots(StringBuilder stringBuilder, IEnumerable<IParkable> parkinglots, string prefix)
         {
-            foreach (var parkingLot in parkingLots)
+            foreach (var parkinglot in parkinglots)
             {
-                stringBuilder.AppendFormat("  P {0} {1}\r\n", parkingLot.GetParkedNumber(), parkingLot.GetTotalsize());
+                AppendParkable(stringBuilder, prefix, parkinglot, "P");
             }
+        }
+
+        private static void AppendParkable(StringBuilder stringBuilder, string prefix, IParkable parkinglot, string flag)
+        {
+            stringBuilder.AppendFormat("{2}{3} {0} {1}\r\n", parkinglot.GetParkedNumber(), parkinglot.GetTotalsize(), prefix, flag);
         }
     }
 }
