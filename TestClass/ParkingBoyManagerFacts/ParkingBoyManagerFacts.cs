@@ -11,7 +11,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
         {
             var car = new Car();
             var parkingLot = new ParkingLot(1);
-            var manager = new ParkingBoyManager(new List<IParkingBoy> { parkingLot});
+            var manager = new ParkingBoyManager(new List<IParkable> { parkingLot});
 
             Assert.Same(car, parkingLot.Pick(manager.Park(car).ParkingToken));
         }
@@ -20,7 +20,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
         public void manager_should_park_and_pick()
         {
             var car = new Car();
-            var manager = new ParkingBoyManager(new List<IParkingBoy> { new ParkingLot(1)});
+            var manager = new ParkingBoyManager(new List<IParkable> { new ParkingLot(1)});
 
             Assert.Same(car, manager.Pick(manager.Park(car)));
         }
@@ -30,7 +30,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
         {
             var car = new Car();
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy> { new ParkingBoy(new ParkingLot(1)) });
+                new List<IParkable> { new ParkingBoy(new ParkingLot(1)) });
 
             Assert.Same(car, manager.Pick(manager.Park(car)));
         }
@@ -40,7 +40,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
         {
             var car = new Car();
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy> { new SmartParkingBoy(new ParkingLot(1)) });
+                new List<IParkable> { new SmartParkingBoy(new ParkingLot(1)) });
 
             Assert.Same(car, manager.Pick(manager.Park(car)));
         }
@@ -50,7 +50,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
         {
             var car = new Car();
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy> { new SuperParkingBoy(new ParkingLot()) });
+                new List<IParkable> { new SuperParkingBoy(new ParkingLot()) });
 
             Assert.Same(car, manager.Pick(manager.Park(car)));
         }
@@ -61,7 +61,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
             var car = new Car();
             var superParkingBoy = new SuperParkingBoy(new ParkingLot());
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy> { superParkingBoy});
+                new List<IParkable> { superParkingBoy});
 
             Assert.Same(car, superParkingBoy.Pick(manager.Park(car)));
         }
@@ -73,7 +73,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
             var superParkingBoy = new SuperParkingBoy(new ParkingLot(1));
             superParkingBoy.Park(new Car());
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy>
+                new List<IParkable>
                 {
                     superParkingBoy, new SmartParkingBoy(new ParkingLot(10))
                 });
@@ -90,7 +90,7 @@ namespace OOBootCampTest.ParkingBoyManagerFacts
             var superParkingBoy = new SuperParkingBoy(new ParkingLot(1));
             superParkingBoy.Park(new Car());
             var manager = new ParkingBoyManager(
-                new List<IParkingBoy>
+                new List<IParkable>
                 {
                     smartParkingBoy, superParkingBoy
                 });

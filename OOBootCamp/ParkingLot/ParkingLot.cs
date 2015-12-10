@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class ParkingLot : IParkingBoy
+    public class ParkingLot : IParkable
     {
         private readonly Dictionary<Guid, Car> _parkingCars;
 
-        public readonly int Size;
+        private readonly int _size;
 
         public readonly Guid ParkingLotGuid;
 
-        public int AvaliableParkingSpots => Size - _parkingCars.Count;
+        public int AvaliableParkingSpots => _size - _parkingCars.Count;
 
         public ParkingLot(int size = 20)
         {
             ParkingLotGuid = Guid.NewGuid();
-            Size = size;
+            _size = size;
             _parkingCars = new Dictionary<Guid, Car>();
         }
 
@@ -24,7 +24,7 @@ namespace OOBootCamp.ParkingLot
         {
             var statusCode = StatusCode.Success;
             var token = Guid.Empty;
-            if (_parkingCars.Count == Size)
+            if (_parkingCars.Count == _size)
             {
                 statusCode = StatusCode.ParkinglotIsFull;
             }
@@ -48,7 +48,7 @@ namespace OOBootCamp.ParkingLot
 
         public int GetTotalsize()
         {
-            return Size;
+            return _size;
         }
 
         public int GetParkedNumber()
@@ -56,9 +56,9 @@ namespace OOBootCamp.ParkingLot
             return _parkingCars.Count;
         }
 
-        public string GetParkStatus()
+        public List<ParkingLot> GetParkingLotList()
         {
-            return string.Format("P {0} {1}\r\n", _parkingCars.Count, Size);
+            return new List<ParkingLot> {this};
         }
 
         public Car Pick(Guid token)

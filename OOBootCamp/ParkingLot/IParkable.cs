@@ -1,14 +1,15 @@
+using System.Collections.Generic;
+
 namespace OOBootCamp.ParkingLot
 {
-    public interface IParkingBoy
+    public interface IParkable
     {
         ParkingInfo Park(Car car);
         Car Pick(ParkingInfo parkingInfo);
-        bool CanPark();
 
+        bool CanPark();
         int GetTotalsize();
         int GetParkedNumber();
-
-        string GetParkStatus();
+        List<ParkingLot> GetParkingLotList();
     }
 }

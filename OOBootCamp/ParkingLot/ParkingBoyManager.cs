@@ -7,9 +7,9 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingBoyManager
     {
-        private readonly List<IParkingBoy> _availableBoys;
+        private readonly List<IParkable> _availableBoys;
 
-        public ParkingBoyManager(List<IParkingBoy> boys)
+        public ParkingBoyManager(List<IParkable> boys)
         {
             _availableBoys = boys;
         }
@@ -32,28 +32,37 @@ namespace OOBootCamp.ParkingLot
         public string GetParkStatus()
         {
             var stringBuilder = new StringBuilder();
-            
-            var parkingLots = _availableBoys.Where(t => t is ParkingLot);
-            var parkingBoys = _availableBoys.Where(t => (t is ParkingLot) == false);
             stringBuilder.AppendFormat("M {0} {1}\r\n", _availableBoys.Sum(t => t.GetParkedNumber()), _availableBoys.Sum(t=> t.GetTotalsize()));
 
-            foreach (var parkingLot in parkingLots)
-            {
-                stringBuilder.AppendFormat("  {0}", parkingLot.GetParkStatus());
-            }
+            var parkingLots = _availableBoys.Where(t => t is ParkingLot).ToList();
+            GetParkingLotStatus(stringBuilder, parkingLots);
+
+            var parkingBoys = _availableBoys.Except(parkingLots).ToList();
+            GetParkingBoyStatus(stringBuilder, parkingBoys);
+
+            stringBuilder.Remove(stringBuilder.ToString().LastIndexOf("\r\n", StringComparison.CurrentCultureIgnoreCase), 2);
+            return stringBuilder.ToString();
+        }
+
+        private void GetParkingBoyStatus(StringBuilder stringBuilder, List<IParkable> parkingBoys)
+        {
             foreach (var boy in parkingBoys)
             {
-                var parkStatus = boy.GetParkStatus();
-                var split = parkStatus.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < split.Length; i++)
+                stringBuilder.AppendFormat("  B {0} {1}\r\n", boy.GetParkedNumber(), boy.GetTotalsize());
+                var parkinglots = boy.GetParkingLotList();
+                foreach (var parkinglot in parkinglots)
                 {
-                    split[i] = "  " + split[i];
-                    stringBuilder.AppendLine(split[i]);
+                    stringBuilder.AppendFormat("    P {0} {1}\r\n", parkinglot.GetParkedNumber(), parkinglot.GetTotalsize());
                 }
             }
+        }
 
-            stringBuilder.Remove(stringBuilder.ToString().LastIndexOf("\r\n"), 2);
-            return stringBuilder.ToString();
+        private void GetParkingLotStatus(StringBuilder stringBuilder, List<IParkable> parkingLots)
+        {
+            foreach (var parkingLot in parkingLots)
+            {
+                stringBuilder.AppendFormat("  P {0} {1}\r\n", parkingLot.GetParkedNumber(), parkingLot.GetTotalsize());
+            }
         }
     }
 }
