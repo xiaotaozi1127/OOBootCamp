@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OOBootCamp.ParkingLot
 {
-    public class SuperParkingBoy : IParkingBoy
+    public class SuperParkingBoy : IParkable
     {
         private readonly List<ParkingLot> _parkingLotList;
 
@@ -20,7 +19,7 @@ namespace OOBootCamp.ParkingLot
 
             foreach (var parkingLot in _parkingLotList)
             {
-                var currentVacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.Size;
+                var currentVacancyRate = parkingLot.AvaliableParkingSpots/parkingLot.GetTotalsize();
                 if (currentVacancyRate > vacancyRate)
                 {
                     availableParkingLot = parkingLot;
@@ -42,7 +41,7 @@ namespace OOBootCamp.ParkingLot
 
         public int GetTotalsize()
         {
-            return _parkingLotList.Sum(t => t.Size);
+            return _parkingLotList.Sum(t => t.GetTotalsize());
         }
 
         public int GetParkedNumber()
@@ -50,15 +49,9 @@ namespace OOBootCamp.ParkingLot
             return _parkingLotList.Sum(t => t.GetParkedNumber());
         }
 
-        public string GetParkStatus()
+        public List<ParkingLot> GetParkingLotList()
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendFormat("B {0} {1}\r\n", GetParkedNumber(), GetTotalsize());
-            foreach (ParkingLot parkingLot in _parkingLotList)
-            {
-                stringBuilder.AppendFormat("  {0}", parkingLot.GetParkStatus());
-            }
-            return stringBuilder.ToString();
+            return _parkingLotList;
         }
     }
 }

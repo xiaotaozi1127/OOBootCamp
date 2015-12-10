@@ -28,7 +28,7 @@ namespace OOBootCamp.ParkingLot
 
         public static bool CanPark(List<ParkingLot> parkingLotList)
         {
-            return parkingLotList.Exists(t => t.AvaliableParkingSpots > 0);
+            return parkingLotList.Exists(t => t.CanPark());
         }
     }
 }

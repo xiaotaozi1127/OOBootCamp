@@ -7,9 +7,9 @@ namespace OOBootCamp.ParkingLot
 {
     public class ParkingBoyManager
     {
-        private readonly List<IParkingBoy> _availableBoys;
+        private readonly List<IParkable> _availableBoys;
 
-        public ParkingBoyManager(List<IParkingBoy> boys)
+        public ParkingBoyManager(List<IParkable> boys)
         {
             _availableBoys = boys;
         }
@@ -32,23 +32,22 @@ namespace OOBootCamp.ParkingLot
         public string GetParkStatus()
         {
             var stringBuilder = new StringBuilder();
-            
-            var parkingLots = _availableBoys.Where(t => t is ParkingLot);
-            var parkingBoys = _availableBoys.Where(t => (t is ParkingLot) == false);
             stringBuilder.AppendFormat("M {0} {1}\r\n", _availableBoys.Sum(t => t.GetParkedNumber()), _availableBoys.Sum(t=> t.GetTotalsize()));
 
+            var parkingLots = _availableBoys.Where(t => t is ParkingLot);
             foreach (var parkingLot in parkingLots)
             {
-                stringBuilder.AppendFormat("  {0}", parkingLot.GetParkStatus());
+                stringBuilder.AppendFormat("  P {0} {1}\r\n", parkingLot.GetParkedNumber(), parkingLot.GetTotalsize());
             }
+
+            var parkingBoys = _availableBoys.Except(parkingLots);
             foreach (var boy in parkingBoys)
             {
-                var parkStatus = boy.GetParkStatus();
-                var split = parkStatus.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < split.Length; i++)
+                stringBuilder.AppendFormat("  B {0} {1}\r\n", boy.GetParkedNumber(), boy.GetTotalsize());
+                List<ParkingLot> parkinglots = boy.GetParkingLotList();
+                foreach (var parkinglot in parkinglots)
                 {
-                    split[i] = "  " + split[i];
-                    stringBuilder.AppendLine(split[i]);
+                    stringBuilder.AppendFormat("    P {0} {1}\r\n", parkinglot.GetParkedNumber(), parkinglot.GetTotalsize());
                 }
             }
 
