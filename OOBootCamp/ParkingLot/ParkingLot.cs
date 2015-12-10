@@ -46,6 +46,21 @@ namespace OOBootCamp.ParkingLot
             return AvaliableParkingSpots > 0;
         }
 
+        public int GetTotalsize()
+        {
+            return Size;
+        }
+
+        public int GetParkedNumber()
+        {
+            return _parkingCars.Count;
+        }
+
+        public string GetParkStatus()
+        {
+            return string.Format("P {0} {1}\r\n", _parkingCars.Count, Size);
+        }
+
         public Car Pick(Guid token)
         {
             if (!_parkingCars.ContainsKey(token)) return null;

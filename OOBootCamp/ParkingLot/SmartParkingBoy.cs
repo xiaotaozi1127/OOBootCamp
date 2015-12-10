@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace OOBootCamp.ParkingLot
 {
@@ -36,6 +37,27 @@ namespace OOBootCamp.ParkingLot
         public bool CanPark()
         {
             return ParkingBoyHelper.CanPark(_parkingLotList);
+        }
+
+        public int GetTotalsize()
+        {
+            return _parkingLotList.Sum(t => t.Size);
+        }
+
+        public int GetParkedNumber()
+        {
+            return _parkingLotList.Sum(t => t.GetParkedNumber());
+        }
+
+        public string GetParkStatus()
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendFormat("B {0} {1}\r\n", GetParkedNumber(), GetTotalsize());
+            foreach (ParkingLot parkingLot in _parkingLotList)
+            {
+                stringBuilder.AppendFormat("  {0}", parkingLot.GetParkStatus());
+            }
+            return stringBuilder.ToString();
         }
     }
 }
