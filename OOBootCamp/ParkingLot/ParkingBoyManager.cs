@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OOBootCamp.ParkingLot
 {
@@ -29,42 +28,9 @@ namespace OOBootCamp.ParkingLot
             return _availableBoys.Select(boy => boy.Pick(parkingInfo)).FirstOrDefault(car => car != null);
         }
 
-        public string GetParkStatus()
+        public List<IParkable> GetParableList()
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendFormat("M {0} {1}\r\n", _availableBoys.Sum(t => t.GetParkedNumber()), _availableBoys.Sum(t=> t.GetTotalsize()));
-
-            var parkingLots = _availableBoys.Where(t => t is ParkingLot).ToList();
-            AppendParkingLots(stringBuilder, parkingLots, "  ");
-
-            var parkingBoys = _availableBoys.Except(parkingLots).ToList();
-            GetParkingBoyStatus(stringBuilder, parkingBoys);
-
-            stringBuilder.Remove(stringBuilder.ToString().LastIndexOf("\r\n", StringComparison.CurrentCultureIgnoreCase), 2);
-            return stringBuilder.ToString();
-        }
-
-        private void GetParkingBoyStatus(StringBuilder stringBuilder, List<IParkable> parkingBoys)
-        {
-            foreach (var boy in parkingBoys)
-            {
-                AppendParkable(stringBuilder, "  ", boy, "B");
-                var parkinglots = boy.GetParkingLotList();
-                AppendParkingLots(stringBuilder, parkinglots, "    ");
-            }
-        }
-
-        public static void AppendParkingLots(StringBuilder stringBuilder, IEnumerable<IParkable> parkinglots, string prefix)
-        {
-            foreach (var parkinglot in parkinglots)
-            {
-                AppendParkable(stringBuilder, prefix, parkinglot, "P");
-            }
-        }
-
-        private static void AppendParkable(StringBuilder stringBuilder, string prefix, IParkable parkinglot, string flag)
-        {
-            stringBuilder.AppendFormat("{2}{3} {0} {1}\r\n", parkinglot.GetParkedNumber(), parkinglot.GetTotalsize(), prefix, flag);
+            return _availableBoys;
         }
     }
 }
